@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ScanView">
+        <attr name="sv_autoFocus" format="boolean"/>
+        <attr name="sv_clickFocus" format="boolean"/>
+        <attr name="sv_lightMode">
+            <enum name="on" value="1"/>
+            <enum name="off" value="2"/>
+            <enum name="auto" value="3"/>
+        </attr>
+        <attr name="sv_playBeep" format="boolean"/>
+        <attr name="sv_beep" format="reference"/>
+        <attr name="sv_vibrate" format="boolean"/>
+        <attr name="sv_continued" format="boolean"/>
+        <attr name="sv_continuedDelay" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="BaseFinderView">
+        <attr name="scanView" format="reference"/>
+        <attr name="scanWidth" format="dimension"/>
+        <attr name="scanHeight" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="ViewfinderView">
+        <attr name="vfv_lineMode">
+            <enum name="line" value="1"/>
+            <enum name="grid" value="2"/>
+        </attr>
+        <attr name="vfv_lineDrawable" format="reference"/>
+        <attr name="vfv_lineColor" format="color"/>
+        <attr name="vfv_animTime" format="integer"/>
+        <attr name="vfv_stepUnit" format="dimension"/>
+        <attr name="vfv_reverse" format="boolean"/>
+        <attr name="vfv_maskColor" format="color"/>
+        <attr name="vfv_borderSize" format="dimension"/>
+        <attr name="vfv_borderColor" format="color"/>
+        <attr name="vfv_cornerSize" format="dimension"/>
+        <attr name="vfv_cornerLength" format="dimension"/>
+        <attr name="vfv_cornerColor" format="color"/>
+    </declare-styleable>
+</resources>

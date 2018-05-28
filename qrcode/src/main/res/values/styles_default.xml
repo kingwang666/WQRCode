@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ViewfinderViewStyle">
+        <item name="vfv_lineDrawable">@mipmap/ic_scan_line</item>
+        <item name="vfv_maskColor">@color/mask_color</item>
+    </style>
+
+    <style name="ScanViewStyle">
+        <item name="sv_autoFocus">true</item>
+        <item name="sv_clickFocus">false</item>
+        <item name="sv_lightMode">auto</item>
+        <item name="sv_playBeep">true</item>
+        <item name="sv_beep">@raw/beep</item>
+        <item name="sv_vibrate">true</item>
+        <item name="sv_continued">false</item>
+        <item name="sv_continuedDelay">1000</item>
+    </style>
+</resources>

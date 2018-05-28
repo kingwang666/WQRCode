@@ -1,0 +1,431 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ScanSettingActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="3dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title="@string/app_name"
+        app:titleTextColor="@android:color/white">
+
+    </android.support.v7.widget.Toolbar>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/light_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/light"
+        app:layout_constraintBottom_toBottomOf="@+id/light_rg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/light_rg" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/focus_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/focus"
+        app:layout_constraintBottom_toBottomOf="@+id/focus_rg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/focus_rg" />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/size_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/scan_size"
+        app:layout_constraintBottom_toBottomOf="@+id/scan_width_til"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scan_width_til" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/scan_line_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/scan_line"
+        app:layout_constraintBottom_toBottomOf="@+id/scan_line_rg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/scan_line_rg" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/mask_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/mask"
+        app:layout_constraintBottom_toBottomOf="@+id/mask_color_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/mask_color_view" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/border_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/border"
+        app:layout_constraintBottom_toBottomOf="@+id/border_til"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/border_til" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/corner_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/corner"
+        app:layout_constraintBottom_toBottomOf="@+id/corner_size_til"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/corner_size_til" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/notify_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/notify"
+        app:layout_constraintBottom_toBottomOf="@+id/beep_cb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/beep_cb" />
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/continued_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="@string/continued"
+        app:layout_constraintBottom_toBottomOf="@+id/delay_til"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/delay_til" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="light_tv, size_tv, scan_line_tv, focus_tv, mask_tv, border_tv, corner_tv, notify_tv, continued_tv" />
+
+    <RadioGroup
+        android:id="@+id/light_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:checkedButton="@id/light_auto_rb"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/light_auto_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/auto" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/light_off_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/off" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/light_on_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/on" />
+
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/focus_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@id/focus_auto_rb"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/light_rg">
+
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/focus_auto_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/auto" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/focus_click_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/click" />
+
+
+    </RadioGroup>
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/scan_width_til"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:errorEnabled="false"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/focus_rg">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/scan_width_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="@string/number"
+            android:hint="@string/width"
+            android:minWidth="80dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/scan_height_til"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:errorEnabled="false"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/scan_width_til"
+        app:layout_constraintTop_toBottomOf="@id/focus_rg">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/scan_height_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="@string/number"
+            android:hint="@string/height"
+            android:minWidth="80dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <RadioGroup
+        android:id="@+id/scan_line_rg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:checkedButton="@id/line_rb"
+        android:orientation="horizontal"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/scan_width_til">
+
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/grid_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/grid" />
+
+        <android.support.v7.widget.AppCompatRadioButton
+            android:id="@+id/line_rb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/line" />
+
+
+    </RadioGroup>
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:text="@string/reverse"
+        android:id="@+id/reverse_cb"
+        app:layout_constraintBottom_toBottomOf="@+id/scan_line_rg"
+        app:layout_constraintStart_toEndOf="@+id/scan_line_rg"
+        app:layout_constraintTop_toTopOf="@+id/scan_line_rg"/>
+
+    <View
+        android:id="@+id/scan_color_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scan_line_rg"
+        app:layout_constraintStart_toEndOf="@+id/reverse_cb"
+        app:layout_constraintTop_toTopOf="@+id/scan_line_rg"
+        tools:background="@color/colorPrimary" />
+
+
+    <View
+        android:id="@+id/mask_color_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@+id/scan_line_rg"
+        tools:background="@color/colorPrimary" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/border_til"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:errorEnabled="false"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/mask_color_view">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/border_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="@string/number"
+            android:hint="@string/size"
+            android:minWidth="80dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:id="@+id/border_color_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/border_til"
+        app:layout_constraintStart_toEndOf="@+id/border_til"
+        app:layout_constraintTop_toTopOf="@+id/border_til"
+        tools:background="@color/colorPrimary" />
+
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/corner_size_til"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        app:errorEnabled="false"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/border_til">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/corner_size_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="@string/number"
+            android:hint="@string/size"
+            android:minWidth="80dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/corner_length_til"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:errorEnabled="false"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/corner_size_til"
+        app:layout_constraintTop_toBottomOf="@id/border_til">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/corner_length_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="@string/number"
+            android:hint="@string/length"
+            android:minWidth="80dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <View
+        android:id="@+id/corner_color_view"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/corner_size_til"
+        app:layout_constraintStart_toEndOf="@+id/corner_length_til"
+        app:layout_constraintTop_toTopOf="@+id/corner_size_til"
+        tools:background="@color/colorPrimary" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/beep_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/beep"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toBottomOf="@id/corner_size_til" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/vibrate_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:checked="true"
+        android:text="@string/vibrate"
+        app:layout_constraintStart_toEndOf="@+id/beep_cb"
+        app:layout_constraintTop_toBottomOf="@id/corner_size_til" />
+
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/continued_cb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/continued"
+        app:layout_constraintBottom_toBottomOf="@id/delay_til"
+        app:layout_constraintStart_toEndOf="@+id/barrier"
+        app:layout_constraintTop_toTopOf="@id/delay_til" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/delay_til"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:errorEnabled="false"
+        app:hintEnabled="true"
+        app:layout_constraintStart_toEndOf="@+id/continued_cb"
+        app:layout_constraintTop_toBottomOf="@id/beep_cb">
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/delay_et"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:digits="@string/number"
+            android:hint="@string/delay"
+            android:minWidth="80dp" />
+    </android.support.design.widget.TextInputLayout>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/camera_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/ic_camera_alt_white_24dp"/>
+
+</android.support.constraint.ConstraintLayout>

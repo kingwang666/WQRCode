@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">WQRCode</string>
+
+    <string name="button_allow">允许</string>
+    <string name="button_deny">拒绝</string>
+
+    <string name="permission_camera_rationale">调用相机需要相机权限。</string>
+    <string name="permission_camera_denied">相机权限被拒绝。 请考虑授予它以访问相机！</string>
+    <string name="permission_camera_never_ask_again">相机权限被拒绝，再也不会问。</string>
+
+    <string name="permission_storage_rationale">打开相册需要读写存储权限。</string>
+    <string name="permission_storage_denied">读写存储权限被拒绝。 请考虑授予它以访问相册！</string>
+    <string name="permission_storage_never_ask_again">读写存储权限被拒绝，再也不会问。</string>
+    <string name="on">On</string>
+    <string name="light">闪光灯</string>
+    <string name="off">Off</string>
+    <string name="auto">Auto</string>
+    <string name="scan_line">扫描线</string>
+    <string name="grid">Grid</string>
+    <string name="line">Line</string>
+    <string name="number">0123456789</string>
+    <string name="size">size</string>
+    <string name="length">length</string>
+    <string name="click">Click</string>
+    <string name="focus">聚焦</string>
+    <string name="border">Border</string>
+    <string name="mask">Mask</string>
+    <string name="corner">Corner</string>
+    <string name="beep">Beep</string>
+    <string name="vibrate">Vibrate</string>
+    <string name="continued">Continued</string>
+    <string name="delay">delay</string>
+    <string name="width">width</string>
+    <string name="height">height</string>
+    <string name="notify">Notify</string>
+    <string name="scan_size">ScanSize</string>
+    <string name="reverse">Reverse</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="scan">Scan</string>
+    <string name="album">相册</string>
+    <string name="logo">Logo</string>
+    <string name="none">none</string>
+    <string name="norm">norm</string>
+    <string name="grey">grey</string>
+    <string name="binary">binary</string>
+    <string name="background">Background</string>
+    <string name="color">Color</string>
+    <string name="generate">Generate</string>
+    <string name="awesome">Awesome</string>
+    <string name="theme">Theme</string>
+</resources>
