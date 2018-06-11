@@ -299,7 +299,7 @@ class AwesomeQRCodeEncoder extends BaseEncoder {
     private static int getDominantColor(Bitmap bitmap) {
         return new Palette.Builder(bitmap)
                 .resizeBitmapArea(8)
-                .generate().getDarkVibrantColor(0x000000)/*.getDominantColor(0x000000)*/;
+                .generate()/*.getDarkVibrantColor(0x000000)*/.getDominantColor(0x000000);
     }
 
 

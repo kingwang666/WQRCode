@@ -4,7 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
 
-import com.wang.imageutil.java.ImageUtil;
+import com.wang.imageutil.ImageUtil;
 
 /**
  * Author: wangxiaojie6
@@ -64,25 +64,18 @@ abstract class BaseEncoder {
     }
 
     protected static void binary(Bitmap bitmap) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int[] pixels = new int[width * height];
-        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        int[] binary = new int[width * height];
-        int result = ImageUtil.OTSU(pixels, null, binary);
-        if (result != -1) {
-            bitmap.setPixels(binary, 0, width, 0, 0, width, height);
-        }
+        ImageUtil.OTSU(bitmap);
     }
 
     protected static void grey(Bitmap bitmap) {
-        int width = bitmap.getWidth();
-        int height = bitmap.getHeight();
-        int[] pixels = new int[width * height];
-        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
-        int[] greys = ImageUtil.grey(pixels);
-        if (greys != null) {
-            bitmap.setPixels(greys, 0, width, 0, 0, width, height);
-        }
+//        int width = bitmap.getWidth();
+//        int height = bitmap.getHeight();
+//        int[] pixels = new int[width * height];
+//        bitmap.getPixels(pixels, 0, width, 0, 0, width, height);
+//        int[] greys = ImageUtil.grey(pixels);
+//        if (greys != null) {
+//            bitmap.setPixels(greys, 0, width, 0, 0, width, height);
+//        }
+        ImageUtil.grey(bitmap);
     }
 }

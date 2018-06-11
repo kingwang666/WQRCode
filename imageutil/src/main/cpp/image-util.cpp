@@ -2,49 +2,142 @@
 #include <string>
 #include <math.h>
 #include <android/log.h>
+#include <android/bitmap.h>
 
 #define LOG_TAG "ImageUtil"
 
 int rgb2Grey(int pixel);
 
-
 int argb2Grey(int pixel);
 
+int otsu(int *pixels, int *binaryPixels, int size);
+
+void grey(int *pixels, int *greyPixels, int size);
+
 extern "C"
-JNIEXPORT jintArray JNICALL
-Java_com_wang_imageutil_ImageUtil_nativeGrey(JNIEnv *env, jclass type, jintArray pixels_) {
+JNIEXPORT jboolean JNICALL
+Java_com_wang_imageutil_ImageUtil_nativeGrey(JNIEnv *env, jclass type, jintArray pixels_,
+                                             jintArray greyPixels_) {
+
     jint *pixels = env->GetIntArrayElements(pixels_, NULL);
+    jint *greyPixels = env->GetIntArrayElements(greyPixels_, NULL);
     int size = env->GetArrayLength(pixels_);
-    int *greyPixels = (int *)malloc(static_cast<size_t>(size));
-    __android_log_print(ANDROID_LOG_ERROR, LOG_TAG,
-                        "greyPixels is %p \n", greyPixels);
-    for (int i = 0; i < size; ++i) {
-        int pixel = *(pixels + i);
-        int grey = rgb2Grey(pixel) & 0xFF;
-        int a = (pixel >> 24) & 0xFF;
-        *(greyPixels + i) = (a << 24) | (grey << 16) | (grey << 8) | grey;
+
+    if (size == 0 || size > env->GetArrayLength(greyPixels_)) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG,
+                            "the pixels size is %d, is > greyPixels size", size);
+        env->ReleaseIntArrayElements(pixels_, pixels, 0);
+        env->ReleaseIntArrayElements(greyPixels_, greyPixels, 0);
+        return 0;
     }
+    grey(pixels, greyPixels, size);
+
     env->ReleaseIntArrayElements(pixels_, pixels, 0);
-    jintArray result = env->NewIntArray(size);
-    env->SetIntArrayRegion(result, 0, size, greyPixels);
-    free(greyPixels);
-    return result;
+    env->ReleaseIntArrayElements(greyPixels_, greyPixels, 0);
+    return 1;
+}
+
+extern "C"
+JNIEXPORT jboolean JNICALL
+Java_com_wang_imageutil_ImageUtil_grey__Landroid_graphics_Bitmap_2(JNIEnv *env, jclass type,
+                                                                   jobject bitmap) {
+
+    AndroidBitmapInfo info;
+    void *pixels;
+
+    if (AndroidBitmap_getInfo(env, bitmap, &info) < 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap get info error");
+        return 0;
+    }
+    if (info.format != ANDROID_BITMAP_FORMAT_RGBA_8888 &&
+        info.format != ANDROID_BITMAP_FORMAT_RGB_565) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap format: %d not support",
+                            info.format);
+        return 0;
+    }
+    if (AndroidBitmap_lockPixels(env, bitmap, &pixels) < 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap lock pixels error");
+        return 0;
+    }
+    if (pixels == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap pixels is error");
+        AndroidBitmap_unlockPixels(env, bitmap);
+        return 0;
+    }
+    grey((int *) pixels, (int *) pixels, info.width * info.height);
+    AndroidBitmap_unlockPixels(env, bitmap);
+    return 1;
 }
 
 extern "C"
 JNIEXPORT jint JNICALL
 Java_com_wang_imageutil_ImageUtil_nativeOTSU(JNIEnv *env, jclass type, jintArray pixels_,
-                                             jintArray greyPixels_, jintArray binaryPixels_) {
+                                             jintArray binaryPixels_) {
     jint *pixels = env->GetIntArrayElements(pixels_, NULL);
-    jint *greyPixels = NULL;
-    if (greyPixels_ != NULL) {
-        greyPixels = env->GetIntArrayElements(greyPixels_, NULL);
-    }
     jint *binaryPixels = env->GetIntArrayElements(binaryPixels_, NULL);
-    /**
-     * 是否获取灰度图
-     */
-    bool getGreyPixel = false;
+
+    int size = env->GetArrayLength(pixels_);
+    if (size == 0 || size > env->GetArrayLength(binaryPixels_)) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG,
+                            "the pixels size is %d, is > greyPixels size", size);
+        env->ReleaseIntArrayElements(pixels_, pixels, 0);
+        env->ReleaseIntArrayElements(binaryPixels_, binaryPixels, 0);
+        return -1;
+    }
+
+    int thresholdValue = otsu(pixels, binaryPixels, size);
+
+    env->ReleaseIntArrayElements(pixels_, pixels, 0);
+    env->ReleaseIntArrayElements(binaryPixels_, binaryPixels, 0);
+    return thresholdValue;
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_wang_imageutil_ImageUtil_OTSU__Landroid_graphics_Bitmap_2(JNIEnv *env, jclass type,
+                                                                   jobject bitmap) {
+
+    AndroidBitmapInfo info;
+    int *pixels;
+
+    if (AndroidBitmap_getInfo(env, bitmap, &info) < 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap get info error");
+        return -1;
+    }
+    if (info.format != ANDROID_BITMAP_FORMAT_RGBA_8888 &&
+        info.format != ANDROID_BITMAP_FORMAT_RGB_565) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap format: %d not support",
+                            info.format);
+        return -1;
+    }
+    if (AndroidBitmap_lockPixels(env, bitmap, (void **)&pixels) < 0) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap lock pixels error");
+        return -1;
+    }
+    if (pixels == NULL) {
+        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, "bitmap pixels is error");
+        AndroidBitmap_unlockPixels(env, bitmap);
+        return -1;
+    }
+    int thresholdValue = otsu(pixels, pixels, info.width * info.height);
+    AndroidBitmap_unlockPixels(env, bitmap);
+    return thresholdValue;
+
+}
+
+void grey(int *pixels, int *greyPixels, int size) {
+
+    for (int i = 0; i < size; i++) {
+        int pixel = *(pixels + i);
+        int grey = rgb2Grey(pixel) & 0xFF;
+        int a = (pixel >> 24) & 0xFF;
+        *(greyPixels + i) = (a << 24) | (grey << 16) | (grey << 8) | grey;
+    }
+
+}
+
+int otsu(int *pixels, int *binaryPixels, int size) {
+
     /**
      * 总的灰度值
      */
@@ -57,10 +150,7 @@ Java_com_wang_imageutil_ImageUtil_nativeOTSU(JNIEnv *env, jclass type, jintArray
      * 阈值
      */
     int thresholdValue = 0;
-    /**
-     * 总的像素点个数
-     */
-    int n = env->GetArrayLength(pixels_);
+
     /**
      * 前景(像素小于阈值)像素点个数
      */
@@ -86,34 +176,14 @@ Java_com_wang_imageutil_ImageUtil_nativeOTSU(JNIEnv *env, jclass type, jintArray
      */
     double g = 0;
 
-    int *greys = (int *)malloc(static_cast<size_t>(n));
     int hist[256] = {0};
 
-    if (greyPixels != NULL) {
-        if (env->GetArrayLength(greyPixels_) == n) {
-            getGreyPixel = true;
-        } else {
-            __android_log_print(ANDROID_LOG_ERROR, LOG_TAG,
-                                "the grey pixel length must = width * height");
-        }
-    }
-
-    if (env->GetArrayLength(binaryPixels_) != n) {
-        __android_log_print(ANDROID_LOG_ERROR, LOG_TAG,
-                            "the binary pixel length must = width * height");
-        free(greys);
-        return -1;
-    }
-
-    for (int i = 0; i < n; ++i) {
+    for (int i = 0; i < size; i++) {
         int pixel = *(pixels + i);
         int grey = argb2Grey(pixel) & 0xFF;
-        greys[i] = grey;
+        *(binaryPixels + i) = grey;
         sumGrey += grey;
         hist[grey]++;
-        if (getGreyPixel) {
-            greyPixels[i] = 0xff000000 | (grey << 16) | (grey << 8) | grey;
-        }
     }
 
     for (int i = 0; i < 256; i++) {
@@ -121,7 +191,7 @@ Java_com_wang_imageutil_ImageUtil_nativeOTSU(JNIEnv *env, jclass type, jintArray
         if (n0 == 0) {
             continue;
         }
-        n1 = n - n0;
+        n1 = size - n0;
         if (n1 == 0) {
             break;
         }
@@ -136,20 +206,13 @@ Java_com_wang_imageutil_ImageUtil_nativeOTSU(JNIEnv *env, jclass type, jintArray
         }
     }
 
-    for (int i = 0; i < n; i++) {
-        if (greys[i] >= thresholdValue) {
-            binaryPixels[i] = 0xFFFFFFFF;
+    for (int i = 0; i < size; i++) {
+        if (*(binaryPixels + i) >= thresholdValue) {
+            *(binaryPixels + i) = 0xFFFFFFFF;
         } else {
-            binaryPixels[i] = 0xFF000000;
+            *(binaryPixels + i) = 0xFF000000;
         }
     }
-
-    env->ReleaseIntArrayElements(pixels_, pixels, 0);
-    if (greyPixels != NULL) {
-        env->ReleaseIntArrayElements(greyPixels_, greyPixels, 0);
-    }
-    env->ReleaseIntArrayElements(binaryPixels_, binaryPixels, 0);
-    free(greys);
     return thresholdValue;
 }
 
@@ -196,3 +259,4 @@ int argbToRgb(int pixel) {
     b = (255 - a) + a * b / 255;
     return 0xff000000 | (r << 16) | (g << 8) | b;
 }
+
