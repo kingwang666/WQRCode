@@ -1,7 +1,6 @@
 package com.wang.qrcode.widget;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
+import androidx.annotation.NonNull;
 
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;

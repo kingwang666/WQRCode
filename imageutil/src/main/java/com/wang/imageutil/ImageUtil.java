@@ -1,9 +1,8 @@
 package com.wang.imageutil;
 
 import android.graphics.Bitmap;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.util.Log;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * Author: wangxiaojie6

@@ -3,7 +3,7 @@ package com.wang.qrcode.camera;
 import android.content.Context;
 import android.graphics.Point;
 import android.hardware.Camera;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.Display;
 import android.view.Surface;

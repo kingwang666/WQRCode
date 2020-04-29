@@ -5,11 +5,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.annotation.StringRes
-import android.support.v7.app.AlertDialog
+import androidx.annotation.ColorInt
+import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import android.view.View
 import android.widget.CompoundButton
 import android.widget.RadioGroup

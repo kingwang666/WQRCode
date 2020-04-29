@@ -4,8 +4,8 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.trello.lifecycle2.android.lifecycle.AndroidLifecycle
 import kotlinx.android.synthetic.main.activity_main.*
 import java.text.SimpleDateFormat

@@ -1,6 +1,6 @@
 package com.wang.qrcode.camera;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 /**
  * Author: wangxiaojie6

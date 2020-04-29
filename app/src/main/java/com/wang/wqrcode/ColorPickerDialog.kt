@@ -2,8 +2,8 @@ package com.wang.wqrcode
 
 import android.content.Context
 import android.os.Bundle
-import android.support.annotation.ColorInt
-import android.support.v7.app.AppCompatDialog
+import androidx.annotation.ColorInt
+import androidx.appcompat.app.AppCompatDialog
 import android.view.View
 import kotlinx.android.synthetic.main.dialog_color_picker.*
 

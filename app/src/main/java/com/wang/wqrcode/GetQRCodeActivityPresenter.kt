@@ -1,6 +1,6 @@
 package com.wang.wqrcode
 
-import android.arch.lifecycle.Lifecycle
+import androidx.lifecycle.Lifecycle
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
